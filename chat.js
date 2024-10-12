@@ -9,7 +9,7 @@ const whatsapp = new Client({
 
 // whatsapp
 whatsapp.on('qr', qr => {
-    //qrcode.generate(qr, {small: true });
+    qrcode.generate(qr, {small: true });
     console.log(qr)
 });
 
