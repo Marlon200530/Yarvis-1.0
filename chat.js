@@ -11,7 +11,7 @@ whatsapp.on('qr', qr => {
     qrcode.generate(qr, {
         small: true
     });
-    
+    console.log(qr)
 });
 
 whatsapp.on('ready', () => {
