@@ -1,7 +1,10 @@
 const qrcode = require('qrcode-terminal');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const AI = require('./AI.js');
-const http = require('http');
+const express = require('express'); // Importa o Express
+
+const app = express(); // Cria uma instância do Express
+const port = 3000 || process.env.PORT; // Define a porta
 
 const whatsapp = new Client({
     authStrategy: new LocalAuth()
@@ -27,16 +30,12 @@ whatsapp.on('message', async message => {
 
 whatsapp.initialize();
 
-// Servidor HTTP
-const hostname = '127.0.0.1'; // localhost
-const port = 3000 || process.env.PORT;
-
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello, World!\n');
+// Rota básica usando Express
+app.get('/', (req, res) => {
+    res.status(200).send('Hello, World!\n'); // Resposta da rota
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Servidor rodando em http://${hostname}:${port}/`);
+// Inicia o servidor Express
+app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}/`);
 });
